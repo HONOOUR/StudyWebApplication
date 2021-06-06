@@ -1,17 +1,17 @@
 package com.studyolle.demo.account;
 
-import com.studyolle.demo.ConsoleMailSender;
 import com.studyolle.demo.domain.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
-import java.util.Properties;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AccountService {
 
@@ -42,7 +42,7 @@ public class AccountService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(newAccount.getEmail());
         mailMessage.setSubject("study, sign up completes");
-        mailMessage.setText("/check-email-token=" + newAccount.getEmailCheckerToken() +
+        mailMessage.setText("/check-email-token?token=" + newAccount.getEmailCheckerToken() +
                 "&email=" + newAccount.getEmail());
         javaMailSender.send(mailMessage);
     }
