@@ -2,66 +2,15 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Test Web Application</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-</head>
+<head th:replace="fragments.html :: head"></head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/" th:href="@{/}">Study</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <form th:action="@{/search/study}" class="form-inline" method="get">
-                    <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="find study" aria-label="Search" />
-                </form>
-            </li>
-        </ul>
-        <ul class="navbar-nav justify-content-end">
-            <li class="nav-item" sec:authorize="!isAuthenticated()">
-                <a class="nav-link" href="#" th:href="@{/login}">Log in</a>
-            </li>
-            <li class="nav-item" sec:authorize="!isAuthenticated()">
-                <a class="nav-link" href="#" th:href="@{/sign-up}">Sign up</a>
-            </li>
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" href="#" th:href="@{/notifications}">Notification</a>
-            </li>
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link btn-outline-primary" href="#" th:href="@{/notifications}">Create Study</a>
-            </li>
-            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                     Profile
-                </a>
-                <div class="dropdown-menu dropdown-menu-sm-right" aria-labelledby="userDropdown">
-                    <h6 class="dropdown-header">
-                        <span sec:authentication="name">Username</span>
-                    </h6>
-                    <a class="dropdown-item" th:href="@{'/profile/' + ${#authentication.name}}">Profile</a>
-                    <a class="dropdown-item" href="#">Study</a>
-                        <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" th:href="@{'/settings/profile'}">Settings</a>
-                    <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/logout}" method="post">
-                        <button class="dropdown-item" type="submit">Log out</button>
-                    </form>
-                </div>
-            </li>
-        </ul>
+    <div th:replace="fragments.html :: main-nav"></div>
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Study web test application</h2>
+        </div>
     </div>
-</nav>
-<div class="container">
-    <div class="py-5 text-center">
-        <h2>Study web test application</h2>
-    </div>
-</div>
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <div th:replace="fragments.html :: footer"></div>
 <script type="application/javascript">
     (function () {}())
 </script>
