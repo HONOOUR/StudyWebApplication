@@ -23,7 +23,7 @@ public class Account {
 
     private boolean emailVerified;
 
-    private String emailCheckerToken;
+    private String emailCheckToken;
 
     private LocalDateTime joinedAt;
 
@@ -51,11 +51,15 @@ public class Account {
     private boolean studyUpdateByWeb;
 
     public void generateEmailCheckToken() {
-        this.emailCheckerToken = UUID.randomUUID().toString();
+        this.emailCheckToken = UUID.randomUUID().toString();
     }
 
     public void completeSignUp() {
         this.emailVerified = true;
         this.joinedAt = LocalDateTime.now();
+    }
+
+    public boolean isValidToken(String token) {
+        return this.emailCheckToken.equals(token);
     }
 }
