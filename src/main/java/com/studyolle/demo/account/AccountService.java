@@ -1,6 +1,7 @@
 package com.studyolle.demo.account;
 
 import com.studyolle.demo.domain.Account;
+import com.studyolle.demo.settings.Profile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -37,7 +38,7 @@ public class AccountService implements UserDetailsService {
     private Account saveNewAccount(@Valid SignUpForm signUpForm) {
         Account account = Account.builder()
                 .email(signUpForm.getEmail())
-                .nickname((signUpForm.getNickname()))
+                .nickname(signUpForm.getNickname())
                 .password(passwordEncoder.encode(signUpForm.getPassword()))
                 .studyCreatedByWeb(true)
                 .studyUpdateByWeb(true)
@@ -66,6 +67,7 @@ public class AccountService implements UserDetailsService {
         context.setAuthentication(token);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String emailOrNickname) throws UsernameNotFoundException {
         Account account = accountRepository.findByEmail(emailOrNickname);
@@ -78,5 +80,18 @@ public class AccountService implements UserDetailsService {
         }
 
         return new UserAccount(account);
+    }
+
+    public void completeSignUp(Account account) {
+        account.completeSignUp();
+        login(account);
+    }
+
+    public void updateProfile(Account account, Profile profile) {
+        account.setUrl(profile.getUrl());
+        account.setOccupation(profile.getOccupation());
+        account.setLocation(profile.getLocation());
+        account.setBio(profile.getBio());
+        accountRepository.save(account);
     }
 }
