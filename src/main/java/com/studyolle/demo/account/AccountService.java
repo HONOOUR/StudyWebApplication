@@ -92,6 +92,12 @@ public class AccountService implements UserDetailsService {
         account.setOccupation(profile.getOccupation());
         account.setLocation(profile.getLocation());
         account.setBio(profile.getBio());
-        accountRepository.save(account);
+        account.setProfileImage(profile.getProfileImage());
+        accountRepository.save(account); // account parameter is detached state
+    }
+
+    public void updatePassword(Account account, String newPassword) {
+        account.setPassword(passwordEncoder.encode(newPassword));
+        accountRepository.save(account); // merge
     }
 }
