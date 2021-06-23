@@ -4,6 +4,7 @@ import com.studyolle.demo.account.AccountService;
 import com.studyolle.demo.account.CurrentAccount;
 import com.studyolle.demo.domain.Account;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,6 +28,7 @@ public class SettingsController {
     static final String SETTINGS_NOTIFICATIONS_URL = "/settings/notifications";
 
     private final AccountService accountService;
+    private final ModelMapper modelMapper;
 
     @InitBinder("passwordForm")
     public void InitBinder(WebDataBinder webDataBinder) {
@@ -36,7 +38,7 @@ public class SettingsController {
     @GetMapping(SETTINGS_PROFILE_URL)
     public String updateProfileForm(@CurrentAccount Account account, Model model) {
         model.addAttribute(account);
-        model.addAttribute(new Profile(account));
+        model.addAttribute(modelMapper.map(account, Profile.class));
         return SETTINGS_PROFILE_VIEW_NAME;
     }
 
@@ -76,7 +78,7 @@ public class SettingsController {
     @GetMapping(SETTINGS_NOTIFICATIONS_URL)
     public String updateNotificationsForm(@CurrentAccount Account account, Model model) {
         model.addAttribute(account);
-        model.addAttribute(new Notification(account));
+        model.addAttribute(modelMapper.map(account, Notification.class));
         return SETTINGS_NOTIFICATIONS_VIEW_NAME;
     }
 
