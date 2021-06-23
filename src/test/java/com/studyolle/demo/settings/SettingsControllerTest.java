@@ -21,14 +21,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @AutoConfigureMockMvc
 class SettingsControllerTest {
-
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     MockMvc mockMvc;
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @AfterEach
     void afterEach() {
@@ -80,6 +80,16 @@ class SettingsControllerTest {
     }
 
     @WithAccount("jieun")
+    @DisplayName("패스워드 수정 폼")
+    @Test
+    void updatePassword_form() throws Exception {
+        mockMvc.perform(get(SettingsController.SETTINGS_PASSWORD_URL))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("account"))
+                .andExpect(model().attributeExists("passwordForm"));
+    }
+
+    @WithAccount("jieun")
     @DisplayName("비밀번호 수정하기 - 입력값 정상")
     @Test
     void updatePassword_success() throws Exception {
@@ -104,7 +114,9 @@ class SettingsControllerTest {
                 .with(csrf()))
                 .andExpect(status().isOk()) // redirect
                 .andExpect(view().name(SettingsController.SETTINGS_PASSWORD_VIEW_NAME)) // view name
-                .andExpect(flash().attributeExists("message")); // message
+                .andExpect(model().hasErrors())
+                .andExpect(model().attributeExists("passwordForm"))
+                .andExpect(model().attributeExists("account"));
         Account jieun = accountRepository.findByNickname("jieun");
         assertTrue(passwordEncoder.matches("12341234", jieun.getPassword()));
     }

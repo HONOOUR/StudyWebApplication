@@ -1,6 +1,7 @@
 package com.studyolle.demo.account;
 
 import com.studyolle.demo.domain.Account;
+import com.studyolle.demo.settings.Notification;
 import com.studyolle.demo.settings.Profile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
@@ -41,7 +42,7 @@ public class AccountService implements UserDetailsService {
                 .nickname(signUpForm.getNickname())
                 .password(passwordEncoder.encode(signUpForm.getPassword()))
                 .studyCreatedByWeb(true)
-                .studyUpdateByWeb(true)
+                .studyUpdatedByWeb(true)
                 .studyEnrollmentResultByWeb(true)
                 .build();
 
@@ -99,5 +100,14 @@ public class AccountService implements UserDetailsService {
     public void updatePassword(Account account, String newPassword) {
         account.setPassword(passwordEncoder.encode(newPassword));
         accountRepository.save(account); // merge
+    }
+
+    public void updateNotifications(Account account, Notification notification) {
+        account.setStudyCreatedByEmail(notification.isStudyCreatedByEmail());
+        account.setStudyCreatedByWeb(notification.isStudyCreatedByWeb());
+        account.setStudyEnrollmentResultByEmail(notification.isStudyEnrollmentResultByEmail());
+        account.setStudyEnrollmentResultByWeb(notification.isStudyEnrollmentResultByWeb());
+        account.setStudyUpdatedByEmail(notification.isStudyUpdatedByEmail());
+        account.setStudyUpdatedByWeb(notification.isStudyUpdatedByWeb());
     }
 }
