@@ -1,8 +1,8 @@
 package com.studyolle.demo.account;
 
 import com.studyolle.demo.domain.Account;
-import com.studyolle.demo.settings.Notification;
-import com.studyolle.demo.settings.Profile;
+import com.studyolle.demo.settings.form.Notification;
+import com.studyolle.demo.settings.form.Profile;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.mail.SimpleMailMessage;
@@ -102,6 +102,11 @@ public class AccountService implements UserDetailsService {
 
     public void updateNotifications(Account account, Notification notification) {
         modelMapper.map(notification, account);
+        accountRepository.save(account);
+    }
+
+    public void updateNickname(Account account, String nickname) {
+        account.setNickname(nickname);
         accountRepository.save(account);
     }
 }
