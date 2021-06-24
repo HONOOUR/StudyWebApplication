@@ -7,6 +7,7 @@ import com.studyolle.demo.settings.form.NicknameForm;
 import com.studyolle.demo.settings.form.Notification;
 import com.studyolle.demo.settings.form.PasswordForm;
 import com.studyolle.demo.settings.form.Profile;
+import com.studyolle.demo.settings.validator.NicknameValidator;
 import com.studyolle.demo.settings.validator.PasswordFormValidator;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -36,10 +37,16 @@ public class SettingsController {
 
     private final AccountService accountService;
     private final ModelMapper modelMapper;
+    private final NicknameValidator nicknameValidator;
 
     @InitBinder("passwordForm")
-    public void InitBinder(WebDataBinder webDataBinder) {
+    public void passwordFormInitBinder(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(new PasswordFormValidator());
+    }
+
+    @InitBinder("nicknameForm")
+    public void nicknameFormInitBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(nicknameValidator);
     }
 
     @GetMapping(SETTINGS_PROFILE_URL)
