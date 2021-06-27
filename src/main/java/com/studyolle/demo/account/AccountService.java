@@ -1,6 +1,7 @@
 package com.studyolle.demo.account;
 
 import com.studyolle.demo.domain.Account;
+import com.studyolle.demo.domain.Tag;
 import com.studyolle.demo.settings.form.Notification;
 import com.studyolle.demo.settings.form.Profile;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -118,5 +121,15 @@ public class AccountService implements UserDetailsService {
         mailMessage.setSubject("스터디 테스트 웹, 로그인 링크");
         mailMessage.setText("/login-by-email?token=" + account.getEmailCheckToken() + "&email=" + account.getEmail());
         javaMailSender.send(mailMessage);
+    }
+
+    public void addTag(Account account, Tag tag) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        byId.ifPresent((a -> a.getTags().add(tag)));
+    }
+
+    public Set<Tag> getTags(Account account) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        return byId.orElseThrow().getTags();
     }
 }
