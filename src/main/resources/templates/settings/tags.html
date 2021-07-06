@@ -20,6 +20,7 @@
                         태그를 입력하고 콤마(,) 또는 엔터를 입력하세요.
                     </div>
 <!--                   strings.listJoin ["jpa", "java", "spring] -> jpa, java, spring -->
+                    <div id="whitelist" th:text="${whitelist}" hidden></div>
                     <input id="tags" type="text" name="tags" class="tagify-outside" aria-describedby="tagHelp" th:value="${#strings.listJoin(tags, ',')}"/>
                 </div>
             </div>
@@ -66,7 +67,7 @@
         var tagInput = document.querySelector("#tags");
         var tagify = new Tagify(tagInput, {
             pattern: /^.{0,20}$/,
-            // whitelist: JSON.parse(document.querySelector("#whitelist").textContent),
+            whitelist: JSON.parse(document.querySelector("#whitelist").textContent),
             dropdown : {
                 enabled: 1, // suggest tags after a single character input
             } // map tags
