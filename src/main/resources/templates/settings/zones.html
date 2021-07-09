@@ -56,8 +56,8 @@
             tagRequest("/remove", e.detail.data.value);
         }
 
-        var tagInput = document.querySelector("#zones");
-        var tagify = new Tagify(tagInput, {
+        var zoneInput = document.querySelector("#zones");
+        var tagify = new Tagify(zoneInput, {
             pattern: /^.{0,20}$/,
             whitelist: JSON.parse(document.querySelector("#whitelist").textContent),
             dropdown : {
