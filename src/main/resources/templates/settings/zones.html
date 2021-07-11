@@ -32,7 +32,7 @@
 <script th:replace="fragments.html :: ajax-csrf-header"></script>
 <script type="application/javascript" th:inline="javascript">
     $(function() {
-        function tagRequest(url, tagTitle) {
+        function zoneRequest(url, zoneName) {
             $.ajax({
                 dataType: "json",
                 autocomplete: {
@@ -49,16 +49,16 @@
         }
 
         function onAdd(e) {
-            tagRequest("/add", e.detail.data.value);
+            zoneRequest("/add", e.detail.data.value);
         }
 
         function onRemove(e) {
-            tagRequest("/remove", e.detail.data.value);
+            zoneRequest("/remove", e.detail.data.value);
         }
 
         var zoneInput = document.querySelector("#zones");
         var tagify = new Tagify(zoneInput, {
-            pattern: /^.{0,20}$/,
+            enforceWhitelist: true,
             whitelist: JSON.parse(document.querySelector("#whitelist").textContent),
             dropdown : {
                 enabled: 1, // suggest tags after a single character input
