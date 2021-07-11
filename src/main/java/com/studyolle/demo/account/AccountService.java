@@ -2,6 +2,7 @@ package com.studyolle.demo.account;
 
 import com.studyolle.demo.domain.Account;
 import com.studyolle.demo.domain.Tag;
+import com.studyolle.demo.domain.Zone;
 import com.studyolle.demo.settings.form.Notification;
 import com.studyolle.demo.settings.form.Profile;
 import lombok.RequiredArgsConstructor;
@@ -116,18 +117,33 @@ public class AccountService implements UserDetailsService {
         javaMailSender.send(mailMessage);
     }
 
-    public void addTag(Account account, Tag tag) {
-        Optional<Account> byId = accountRepository.findById(account.getId());
-        byId.ifPresent((a -> a.getTags().add(tag)));
-    }
-
     public Set<Tag> getTags(Account account) {
         Optional<Account> byId = accountRepository.findById(account.getId());
         return byId.orElseThrow().getTags();
     }
 
+    public void addTag(Account account, Tag tag) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        byId.ifPresent(a -> a.getTags().add(tag));
+    }
+
     public void removeTag(Account account, Tag tag) {
         Optional<Account> byId = accountRepository.findById(account.getId());
-        byId.ifPresent((a -> a.getTags().remove(tag)));
+        byId.ifPresent(a -> a.getTags().remove(tag));
+    }
+
+    public Set<Zone> getZones(Account account) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        return byId.orElseThrow().getZones();
+    }
+
+    public void addZone(Account account, Zone zone) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        byId.ifPresent(a -> a.getZones().add(zone));
+    }
+
+    public void removeZone(Account account, Zone zone) {
+        Optional<Account> byId = accountRepository.findById(account.getId());
+        byId.ifPresent(a -> a.getZones().remove(zone));
     }
 }
