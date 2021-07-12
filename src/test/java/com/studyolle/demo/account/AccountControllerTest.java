@@ -1,6 +1,8 @@
 package com.studyolle.demo.account;
 
 import com.studyolle.demo.domain.Account;
+import com.studyolle.demo.mail.EmailMessage;
+import com.studyolle.demo.mail.EmailService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class AccountControllerTest {
     private AccountRepository accountRepository;
 
     @MockBean
-    private JavaMailSender javaMailSender;
+    private EmailService emailService;
 
     @DisplayName("Authentication mail - input error")
     @Test
@@ -105,6 +107,6 @@ public class AccountControllerTest {
 
         // access database
         assertTrue(accountRepository.existsByEmail("hearful@icloud.com"));
-        then(javaMailSender).should().send(any(SimpleMailMessage.class));
+        then(emailService).should().sendEmail(any(EmailMessage.class));
     }
 }
