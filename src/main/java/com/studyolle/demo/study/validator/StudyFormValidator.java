@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 @RequiredArgsConstructor
 public class StudyFormValidator implements Validator {
 
-    private StudyRepository studyRepository;
+    private final StudyRepository studyRepository;
 
     @Override
     public boolean supports(Class<?> aClass) {

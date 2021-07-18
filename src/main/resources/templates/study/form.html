@@ -33,8 +33,8 @@
 
                 <div class="form-group">
                     <label for="shortDescription">짧은 소개</label>
-                    <input id="shortDescription" type="text" th:field="*{shortDescription}" class="form-control"
-                           placeholder="스터디를 짧게 소개해 주세요." aria-describedby="shortDescriptionHelp" required maxlength="50">
+                    <textarea id="shortDescription" type="text" th:field="*{shortDescription}" class="form-control"
+                              placeholder="스터디를 짧게 소개해 주세요." aria-describedby="shortDescriptionHelp" required maxlength="50"></textarea>
                     <small id="shortDescriptionHelp" class="form-text text-muted">
                         100자 이내로 스터디 짧은 소개해 주세
                     </small>
@@ -44,8 +44,8 @@
 
                 <div class="form-group">
                     <label for="fullDescription">상세 소개</label>
-                    <input id="fullDescription" type="text" th:field="*{fullDescription}" class="editor form-control"
-                           placeholder="스터디를 자세히 설명해 주세요." aria-describedby="fullDescriptionHelp" required>
+                    <textarea id="fullDescription" type="text" th:field="*{fullDescription}" class="editor form-control"
+                           placeholder="스터디를 자세히 설명해 주세요." aria-describedby="fullDescriptionHelp" required></textarea>
                     <small id="fullDescriptionHelp" class="form-text text-muted">
                         스터디 목표, 일정, 진행 방식, 사용할 교재 또는 인터넷 강좌 그리고 모집중인 스터디원 등 스터디에 대해 자세히 적어 주세요.
                     </small>
