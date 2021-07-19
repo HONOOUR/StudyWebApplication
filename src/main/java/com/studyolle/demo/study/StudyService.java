@@ -17,6 +17,11 @@ public class StudyService {
         Study newStudy = studyRepository.save(study);
         newStudy.addManager(account);
 
-        return null;
+        return newStudy;
+    }
+
+    public Study getStudy(String path) {
+        Study study = this.studyRepository.findByPath(path);
+        return study;
     }
 }
