@@ -45,4 +45,13 @@ public class StudyService {
     public void updateStudyDescription(Study study, StudyDescriptionForm studyDescriptionForm) {
         modelMapper.map(studyDescriptionForm, study);
     }
+
+    public void updateStudyBannerImage(Study study, String image) {
+        study.setImage(image);
+    }
+
+    public void updateStudyBannerImageStatus(Study study) {
+        Boolean isEnabled = study.isUseBanner();
+        study.setUseBanner(!isEnabled);
+    }
 }

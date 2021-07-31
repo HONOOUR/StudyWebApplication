@@ -29,7 +29,7 @@ public class StudySettingsController {
 
     @GetMapping("/description")
     public String viewStudySettings(@CurrentAccount Account account, @PathVariable String path, Model model) {
-        Study study = studyService.getStudy(path);
+        Study study = studyService.getStudyToUpdate(account, path);
         model.addAttribute(account);
         model.addAttribute(study);
         model.addAttribute(modelMapper.map(study, StudyDescriptionForm.class));
@@ -51,7 +51,40 @@ public class StudySettingsController {
         return "redirect:/study/" + getPath(path) + "/settings/description";
     }
 
+    @GetMapping("/banner")
+    public String viewStudyBanner(@CurrentAccount Account account, @PathVariable String path, Model model) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        model.addAttribute(account);
+        model.addAttribute(study);
+        return "study/settings/banner";
+    }
+
+    @PostMapping("/banner")
+    public String updateStudyBanner(@CurrentAccount Account account, @PathVariable String path, String image, Errors errors, Model model, RedirectAttributes attributes) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        studyService.updateStudyBannerImage(study, image);
+        attributes.addFlashAttribute("message", "스터디 배너 이미지를 수정했습니다.");
+        return "redirect:/study/" + getPath(path) + "/settings/banner";
+    }
+
+    @PostMapping("/banner/enable")
+    public String updateStudyBannerImageEnabled(@CurrentAccount Account account, @PathVariable String path, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        studyService.updateStudyBannerImageStatus(study);
+
+        return "redirect:/study/" + getPath(path) + "/settings/banner";
+    }
+
+    @PostMapping("/banner/disable")
+    public String updateStudyBannerImageDisabled(@CurrentAccount Account account, @PathVariable String path, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        studyService.updateStudyBannerImageStatus(study);
+
+        return "redirect:/study/" + getPath(path) + "/settings/banner";
+    }
+
     private String getPath(String path) {
         return URLEncoder.encode(path, StandardCharsets.UTF_8);
     }
+
 }

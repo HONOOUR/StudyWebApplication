@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments.html :: head">
+</head>
+<body>
+    <div th:replace="fragments.html :: main-nav"></div>
+    <div th:replace="fragments.html :: study-banner"></div>
+
+    <div class="container">
+        <div th:replace="fragments.html :: study-info"></div>
+        <div class="col-2">
+            <div th:replace="fragments.html :: study-settings-menu(currentMenu='settings')"></div>
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div th:replace="fragments.html :: footer"></div>
+    </div>
+    <script type="application/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+
+        })
+    </script>
+</body>
+</html>
