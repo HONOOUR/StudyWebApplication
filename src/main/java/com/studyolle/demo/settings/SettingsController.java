@@ -10,6 +10,7 @@ import com.studyolle.demo.domain.Zone;
 import com.studyolle.demo.settings.form.*;
 import com.studyolle.demo.settings.validator.NicknameValidator;
 import com.studyolle.demo.settings.validator.PasswordFormValidator;
+import com.studyolle.demo.tag.TagForm;
 import com.studyolle.demo.zone.ZoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
