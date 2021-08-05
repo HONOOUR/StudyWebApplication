@@ -1,27 +1,57 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments.html :: head">
+<head th:replace="fragments.html :: head">
 </head>
 <body>
-    <div th:replace="fragments.html :: main-nav"></div>
-    <div th:replace="fragments.html :: study-banner"></div>
+<div th:replace="fragments.html :: main-nav"></div>
+<div th:replace="fragments.html :: study-banner"></div>
 
-    <div class="container">
-        <div th:replace="fragments.html :: study-info"></div>
+<div class="container">
+    <div th:replace="fragments.html :: study-info"></div>
+    <div th:replace="fragments.html :: study-menu(studyMenu='settings')"></div>
+    <div class="row mt-5 justify-content-center">
         <div class="col-2">
-            <div th:replace="fragments.html :: study-settings-menu(currentMenu='settings')"></div>
+            <div th:replace="fragments.html :: study-settings-menu(currentMenu='study')"></div>
         </div>
         <div class="col-8">
+            <div th:replace="fragments.html :: message"></div>
+            <h2>스터디 공개 및 종료</h2>
+            <form th:if="${!study.closed && study.closed}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/close'}" method="post" novalidate>
+                <div class="alert alert-info" role="alert">
+                    스터디 활동을 마쳤다면 스터디를 종료하세요.
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                        스터디 종료하기
+                    </button>
+                </div>
+            </form>
+            <form th:if="${!study.published && !study.closed}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/publish'}" method="post" novalidate>
+                <div class="alert alert-info" role="alert">
+                    스터디를 공개하세요.
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                        스터디 공개
+                    </button>
+                </div>
+            </form>
+
+            <hr/>
+            <h2>팀원 모집</h2>
+            <form th:if="${!study.published}" th:action="@{'/study/' + ${study.getpath()} + '/settings/study/published'}" method="post" novalidate>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                        팀원 모집 시작
+                    </button>
+                </div>
+            </form>
 
         </div>
-        <div th:replace="fragments.html :: footer"></div>
     </div>
-    <script type="application/javascript">
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-
-        })
-    </script>
+    <div th:replace="fragments.html :: footer"></div>
+</div>
+<script th:replace="fragments.html :: tooltip"></script>
 </body>
 </html>

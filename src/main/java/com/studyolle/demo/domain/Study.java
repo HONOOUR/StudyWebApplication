@@ -54,6 +54,8 @@ public class Study {
     @ManyToMany
     private Set<Zone> zones = new HashSet<>();
 
+    private LocalDateTime publishedDateTime;
+
     private LocalDateTime closedDateTime;
 
     private LocalDateTime recruitingUpdatedDateTime;
@@ -81,5 +83,23 @@ public class Study {
 
     public boolean isManager(UserAccount userAccount) {
         return this.managers.contains(userAccount.getAccount());
+    }
+
+    public void close() {
+        if (this.published && !this.closed) {
+            this.closed = true;
+            this.closedDateTime = LocalDateTime.now();
+        } else {
+            throw new RuntimeException("스터디를 종료할 수 없습니다. 공개하지 않았거나 이미 종료한 스터디.");
+        }
+    }
+
+    public void publish() {
+        if (!this.closed && !this.published) {
+            this.published = true;
+            this.publishedDateTime = LocalDateTime.now();
+        } else {
+            throw new RuntimeException("스터디를 공개할 수 없습니다. 종료됐거나 공개하지 않았던 스터디");
+        }
     }
 }

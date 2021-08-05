@@ -92,4 +92,12 @@ public class StudyService {
     public void removeZone(Study study, Zone zone) {
         study.getZones().remove(zone);
     }
+
+    public void close(Study study) {
+        study.close();
+    }
+
+    public void publish(Study study) {
+        study.publish();
+    }
 }

@@ -171,6 +171,37 @@ public class StudySettingsController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/study")
+    public String viewStudyStudy(@CurrentAccount Account account, @PathVariable String path, Model model) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        model.addAttribute(study);
+        model.addAttribute(account);
+        return "/study/settings/study";
+    }
+
+    @PostMapping("/study/close")
+    public String updateStudyClose(@CurrentAccount Account account, @PathVariable String path, RedirectAttributes attributes) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        studyService.close(study);
+        attributes.addFlashAttribute("message", "스터디를 종료했습니다.");
+        return "redirect:/study/" + study.getPath() +"/settings/study";
+    }
+
+    @PostMapping("/study/publish")
+    public String updateStudyPublish(@CurrentAccount Account account, @PathVariable String path, RedirectAttributes attributes) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        studyService.publish(study);
+        attributes.addFlashAttribute("message", "스터디를 공개했습니다.");
+        return "redirect:/study/" + study.getPath() +"/settings/study";
+    }
+
+    @PostMapping("/study/recruit")
+    public String updateStudyRecruit(@CurrentAccount Account account, @PathVariable String path) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        study.setRecruiting(true);
+
+        return "redirect:/study/" + study.getPath() +"/settings/study";
+    }
     private String getPath(String path) {
         return URLEncoder.encode(path, StandardCharsets.UTF_8);
     }
