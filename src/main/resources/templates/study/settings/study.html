@@ -40,10 +40,25 @@
 
             <hr/>
             <h2>팀원 모집</h2>
-            <form th:if="${!study.published}" th:action="@{'/study/' + ${study.getpath()} + '/settings/study/published'}" method="post" novalidate>
+            <form th:if="${!study.recruiting}" th:action="@{'/study/' + ${study.getPath()} + '/settings/recruit/start'}" method="post" novalidate>
+                <div class="alert alert-info" role="alert">
+                    팀원을 모집합니다.
+                    한 시간 이후에 변경 가능
+                </div>
                 <div class="form-group">
                     <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
                         팀원 모집 시작
+                    </button>
+                </div>
+            </form>
+            <form th:if="${study.recruiting}" th:action="@{'/study/' + ${study.getPath()} + '/settings/recruit/stop'}" method="post" novalidate>
+                <div class="alert alert-info" role="alert">
+                    팀원을 종료합니다.
+                    한 시간 이후에 변경 가능
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                        팀원 모집 종
                     </button>
                 </div>
             </form>

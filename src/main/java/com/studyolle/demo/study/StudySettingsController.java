@@ -176,7 +176,7 @@ public class StudySettingsController {
         Study study = studyService.getStudyToUpdate(account, path);
         model.addAttribute(study);
         model.addAttribute(account);
-        return "/study/settings/study";
+        return "study/settings/study";
     }
 
     @PostMapping("/study/close")
@@ -195,13 +195,24 @@ public class StudySettingsController {
         return "redirect:/study/" + study.getPath() +"/settings/study";
     }
 
-    @PostMapping("/study/recruit")
-    public String updateStudyRecruit(@CurrentAccount Account account, @PathVariable String path) {
+    @PostMapping("/recruit/start")
+    public String updateStudyRecruitStart(@CurrentAccount Account account, @PathVariable String path, RedirectAttributes attributes) {
         Study study = studyService.getStudyToUpdate(account, path);
-        study.setRecruiting(true);
+        studyService.startRecruit(study);
+        attributes.addFlashAttribute("message", "팀원 모집을 시작합니다.");
 
         return "redirect:/study/" + study.getPath() +"/settings/study";
     }
+
+    @PostMapping("/recruit/stop")
+    public String updateStudyRecruitStop(@CurrentAccount Account account, @PathVariable String path, RedirectAttributes attributes) {
+        Study study = studyService.getStudyToUpdate(account, path);
+        studyService.stopRecruit(study);
+        attributes.addFlashAttribute("message", "팀원 모집을 그만합니다..");
+
+        return "redirect:/study/" + study.getPath() +"/settings/study";
+    }
+
     private String getPath(String path) {
         return URLEncoder.encode(path, StandardCharsets.UTF_8);
     }

@@ -102,4 +102,22 @@ public class Study {
             throw new RuntimeException("스터디를 공개할 수 없습니다. 종료됐거나 공개하지 않았던 스터디");
         }
     }
+
+    public void startRecruit(Study study) {
+        if (!this.recruiting && this.published && !this.closed) {
+            this.recruiting = true;
+            this.recruitingUpdatedDateTime = LocalDateTime.now();
+        } else {
+            throw new RuntimeException("팀원을 모집할 수 없습니다.");
+        }
+    }
+
+    public void stopRecruit(Study study) {
+        if (this.recruiting && this.published && !this.closed) {
+            this.recruiting = false;
+        } else {
+            throw new RuntimeException("팀원을 모집을 멈출 수 없습니다.");
+        }
+    }
+
 }

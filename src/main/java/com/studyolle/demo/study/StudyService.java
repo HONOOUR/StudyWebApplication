@@ -100,4 +100,13 @@ public class StudyService {
     public void publish(Study study) {
         study.publish();
     }
+
+    public void startRecruit(Study study) {
+        study.startRecruit(study);
+    }
+
+    public void stopRecruit(Study study) {
+        study.stopRecruit(study);
+    }
+
 }
