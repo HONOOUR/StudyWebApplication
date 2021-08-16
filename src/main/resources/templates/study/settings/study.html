@@ -64,7 +64,7 @@
             <hr/>
             <h2>스터디 경로</h2>
             <form th:if="${!study.closed}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/path'}" th:object="${studyPathForm}" method="post" novalidate>
-                <div class="alert alert-info" role="alert">
+                <div class="alert alert-warning" role="alert">
                     스터디 경로를 수정하면 이전에 사용했던 경로로 스터디에 접근할 수 없으니 주의하세요.
                 </div>
                 <input id="path" type="text" th:field="*{path}" class="form-control"
@@ -73,9 +73,9 @@
                     공백없이 문자, 숫자, 대시(-)와 언더바(_)만 2자 이상 20자 이내로 입력하세요. 스터디 홈 주소에 사용합니다. 예) /study/<b>study-path</b>
                 </small>
                 <small class="invalid-feedback">스터디 경로를 입력하세요.</small>
-                <small class="form-text text-danger" th:if="${studyPathError}" th:text="${studyPathError}">Path Error</small>
+                <small class="form-text text-warning" th:if="${studyPathError}" th:text="${studyPathError}">Path Error</small>
                 <div class="form-group">
-                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                    <button class="btn btn-outline-warning btn-block" type="submit" aria-describedby="submitHelp">
                         경로 수정
                     </button>
                 </div>
@@ -83,7 +83,7 @@
             <hr/>
             <h2>스터디 이름</h2>
             <form th:if="${!study.closed}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/title'}" method="post" novalidate>
-                <div class="alert alert-info" role="alert">
+                <div class="alert alert-warning" role="alert">
                     스터디 이름을 수정합니다.
                 </div>
                 <input id="title" type="text" name="newTitle" th:value="*{study.title}" class="form-control"
@@ -92,8 +92,20 @@
                     스터디 이름을 50자 이내로 입력하세요.
                 </small>
                 <div class="form-group">
-                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                    <button class="btn btn-outline-warning btn-block" type="submit" aria-describedby="submitHelp">
                         이름 수정
+                    </button>
+                </div>
+            </form>
+            <hr/>
+            <h2>스터디 삭제</h2>
+            <form th:if="${!study.closed}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/remove'}" method="post" novalidate>
+                <div class="alert alert-danger" role="alert">
+                    스터디를 삭제합니다.
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-danger btn-block" type="submit" aria-describedby="submitHelp">
+                        스터디 삭제
                     </button>
                 </div>
             </form>
