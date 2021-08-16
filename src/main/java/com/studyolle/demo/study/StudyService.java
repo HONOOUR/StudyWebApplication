@@ -5,6 +5,9 @@ import com.studyolle.demo.domain.Study;
 import com.studyolle.demo.domain.Tag;
 import com.studyolle.demo.domain.Zone;
 import com.studyolle.demo.study.form.StudyDescriptionForm;
+import com.studyolle.demo.study.form.StudyForm;
+import com.studyolle.demo.study.form.StudyPathForm;
+import com.studyolle.demo.study.form.StudyTitleForm;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.AccessDeniedException;
@@ -109,4 +112,22 @@ public class StudyService {
         study.stopRecruit(study);
     }
 
+    public void updateStudyPath(Study study, StudyPathForm studyPathForm) {
+        study.setPath(studyPathForm.getPath());
+    }
+
+    public void updateStudyTitle(Study study, String newTitle) {
+        study.setTitle(newTitle);
+    }
+
+    public boolean isValidPath(String path) {
+        if (path.matches("^[ㄱ-ㅎ가-힣a-z0-9_-]{2,20}$")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isValidTitle(String newTitle) {
+        return newTitle.length() <= 50;
+    }
 }

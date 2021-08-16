@@ -37,10 +37,9 @@
                     </button>
                 </div>
             </form>
-
             <hr/>
             <h2>팀원 모집</h2>
-            <form th:if="${!study.recruiting}" th:action="@{'/study/' + ${study.getPath()} + '/settings/recruit/start'}" method="post" novalidate>
+            <form th:if="${!study.recruiting}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/recruit/start'}" method="post" novalidate>
                 <div class="alert alert-info" role="alert">
                     팀원을 모집합니다.
                     한 시간 이후에 변경 가능
@@ -51,7 +50,7 @@
                     </button>
                 </div>
             </form>
-            <form th:if="${study.recruiting}" th:action="@{'/study/' + ${study.getPath()} + '/settings/recruit/stop'}" method="post" novalidate>
+            <form th:if="${study.recruiting}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/recruit/stop'}" method="post" novalidate>
                 <div class="alert alert-info" role="alert">
                     팀원을 종료합니다.
                     한 시간 이후에 변경 가능
@@ -62,7 +61,42 @@
                     </button>
                 </div>
             </form>
-
+            <hr/>
+            <h2>스터디 경로</h2>
+            <form th:if="${!study.closed}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/path'}" th:object="${studyPathForm}" method="post" novalidate>
+                <div class="alert alert-info" role="alert">
+                    스터디 경로를 수정하면 이전에 사용했던 경로로 스터디에 접근할 수 없으니 주의하세요.
+                </div>
+                <input id="path" type="text" th:field="*{path}" class="form-control"
+                       placeholder="예) study-path" aria-describedby="pathHelp" required min="2" max="20">
+                <small id="pathHelp" class="form-text text-muted">
+                    공백없이 문자, 숫자, 대시(-)와 언더바(_)만 2자 이상 20자 이내로 입력하세요. 스터디 홈 주소에 사용합니다. 예) /study/<b>study-path</b>
+                </small>
+                <small class="invalid-feedback">스터디 경로를 입력하세요.</small>
+                <small class="form-text text-danger" th:if="${studyPathError}" th:text="${studyPathError}">Path Error</small>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                        경로 수정
+                    </button>
+                </div>
+            </form>
+            <hr/>
+            <h2>스터디 이름</h2>
+            <form th:if="${!study.closed}" th:action="@{'/study/' + ${study.getPath()} + '/settings/study/title'}" method="post" novalidate>
+                <div class="alert alert-info" role="alert">
+                    스터디 이름을 수정합니다.
+                </div>
+                <input id="title" type="text" name="newTitle" th:value="*{study.title}" class="form-control"
+                       placeholder="스터디 이름" aria-describedby="titleHelp" required max="50">
+                <small id="titleHelp" class="form-text text-muted">
+                    스터디 이름을 50자 이내로 입력하세요.
+                </small>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary btn-block" type="submit" aria-describedby="submitHelp">
+                        이름 수정
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <div th:replace="fragments.html :: footer"></div>
