@@ -60,8 +60,7 @@ public class AccountService implements UserDetailsService {
 
     public void sendSignUpConfirmationEmail(Account newAccount) {
         Context context = new Context();
-        context.setVariable("link", "/check-email-token?token=" + newAccount.getEmailCheckToken() +
-                "&email=" + newAccount.getEmail());
+        context.setVariable("link", "/check-email-token?token=" + newAccount.getEmailCheckToken() + "&email=" + newAccount.getEmail());
         context.setVariable("nickname", newAccount.getNickname());
         context.setVariable("linkName", "이메일 인증하기");
         context.setVariable("message", "Study Test Application Service link click here.");

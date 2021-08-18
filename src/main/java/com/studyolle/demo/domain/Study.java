@@ -128,4 +128,12 @@ public class Study {
     public boolean isRemovable() {
         return !this.published;
     }
+
+    public void addMember(Account account) {
+        this.getMembers().add(account);
+    }
+
+    public void removeMember(Account account) {
+        this.getMembers().remove(account);
+    }
 }

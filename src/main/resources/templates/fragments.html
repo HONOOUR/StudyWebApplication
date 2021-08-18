@@ -112,37 +112,36 @@
             </a>
         </div>
         <div class="col-4 text-right justify-content-end">
-                <span th:if="${!study.published}"
-                      class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="bottom" title="스터디 공개 준비중">
-                    <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>DRAFT</button>
-                </span>
-            <span th:if="${!study.closed}"
+            <span th:if="${!study.published}" class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="bottom" title="스터디 공개 준비중">
+                <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>DRAFT</button>
+            </span>
+            <span th:if="${study.closed}"
                   class="d-inline-block" tabindex="1" data-toggle="tooltip" data-placement="bottom" title="스터디 종료함">
-                    <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>DRAFT</button>
-                </span>
+                <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>CLOSED</button>
+            </span>
             <span th:if="${!study.recruiting}"
                   class="d-inline-block" tabindex="2" data-toggle="tooltip" data-placement="bottom" title="팀원 모집중 아님">
-                    <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>OFF</button>
-                </span>
+                <button class="btn btn-primary btn-sm" style="pointer-events: none;" type="button" disabled>OFF</button>
+            </span>
             <span sec:authorize="isAuthenticated()" th:if="${study.isJoinable(#authentication.principal)}"
                   class="btn-group" role="group" aria-label="Basic Example" >
-                    <a class="btn btn-primary" th:href="@{'/study/' + ${study.path} + '/join'}">
+                    <form class="btn btn-primary" th:action="@{'/study/' + ${study.path} + '/join'}" method="post">
                         Join Study
-                    </a>
-                    <a class="btn btn-outline-primary" th:href="@{'/study/' + ${study.path} + '/members'}"
+                    </form>
+                    <a class="btn btn-outline-primary btn-sm" th:href="@{'/study/' + ${study.path} + '/members'}"
                        th:text="${study.members.size()}">1</a>
                 </span>
             <span sec:authorize="isAuthenticated()" th:if="${!study.closed && study.isMember(#authentication.principal)}"
                   class="btn-group" role="group" >
-                    <a class="btn btn-primary" th:href="@{'/study/' + ${study.path} + '/leave'}">
+                    <a class="btn btn-outline-primary" th:href="@{'/study/' + ${study.path} + '/leave'}">
                         Leave Study
                     </a>
-                    <a class="btn btn-outline-primary" th:href="@{'/study/' + ${study.path} + '/members'}"
+                    <a class="btn btn-outline-primary btn-sm" th:href="@{'/study/' + ${study.path} + '/members'}"
                        th:text="${study.members.size()}">1</a>
                 </span>
             <span sec:authorize="isAuthenticated()" th:if="${study.published && !study.closed && study.isManager(#authentication.principal)}"
                   class="btn-group" role="group">
-                    <a class="btn btn-primary" th:href="@{'/study/' + ${study.path} + '/new-event'}">
+                    <a class="btn btn-outline-primary" th:href="@{'/study/' + ${study.path} + '/new-event'}">
                         <i class="fa fa-plus"></i> Create Study
                     </a>
                 </span>

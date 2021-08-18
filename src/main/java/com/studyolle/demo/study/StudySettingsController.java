@@ -67,7 +67,7 @@ public class StudySettingsController {
 
         studyService.updateStudyDescription(study, studyDescriptionForm);
         attributes.addFlashAttribute("message", "스터디 소개를 수정했습니다.");
-        return "redirect:/study/" + getPath(path) + "/settings/description";
+        return "redirect:/study/" + study.getEncodedPath() + "/settings/description";
     }
 
     @GetMapping("/banner")
@@ -83,7 +83,7 @@ public class StudySettingsController {
         Study study = studyService.getStudyToUpdate(account, path);
         studyService.updateStudyBannerImage(study, image);
         attributes.addFlashAttribute("message", "스터디 배너 이미지를 수정했습니다.");
-        return "redirect:/study/" + getPath(path) + "/settings/banner";
+        return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
     }
 
     @PostMapping("/banner/enable")
@@ -91,7 +91,7 @@ public class StudySettingsController {
         Study study = studyService.getStudyToUpdate(account, path);
         studyService.updateStudyBannerImageStatus(study);
 
-        return "redirect:/study/" + getPath(path) + "/settings/banner";
+        return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
     }
 
     @PostMapping("/banner/disable")
@@ -99,7 +99,7 @@ public class StudySettingsController {
         Study study = studyService.getStudyToUpdate(account, path);
         studyService.updateStudyBannerImageStatus(study);
 
-        return "redirect:/study/" + getPath(path) + "/settings/banner";
+        return "redirect:/study/" + study.getEncodedPath() + "/settings/banner";
     }
 
     @GetMapping("/tags")
@@ -215,10 +215,6 @@ public class StudySettingsController {
         attributes.addFlashAttribute("message", "팀원 모집을 그만합니다..");
 
         return "redirect:/study/" + study.getEncodedPath() + "/settings/study";
-    }
-
-    private String getPath(String path) {
-        return URLEncoder.encode(path, StandardCharsets.UTF_8);
     }
 
     @PostMapping("/study/path")
