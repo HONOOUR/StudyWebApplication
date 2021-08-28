@@ -20,7 +20,7 @@ public class WithAccountSecurityContextFactory implements WithSecurityContextFac
 
         SignUpForm signUpForm = new SignUpForm();
         signUpForm.setNickname("jieun");
-        signUpForm.setEmail("jieun@icloud.com");
+        signUpForm.setEmail("hearful@icloud.com");
         signUpForm.setPassword("12341234");
         accountService.processNewAccount(signUpForm);
 
