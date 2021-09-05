@@ -1,8 +1,7 @@
 package com.studyolle.demo.domain;
 
-import com.studyolle.demo.account.UserAccount;
+import com.studyolle.demo.modules.account.UserAccount;
 import lombok.*;
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.net.URLEncoder;
