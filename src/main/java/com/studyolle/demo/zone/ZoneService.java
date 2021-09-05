@@ -4,7 +4,7 @@ import com.studyolle.demo.domain.Zone;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@Service
 @Transactional
 @RequiredArgsConstructor
 public class ZoneService {
