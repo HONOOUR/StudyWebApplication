@@ -1,0 +1,23 @@
+package com.studyolle.demo.event;
+
+import com.studyolle.demo.domain.Account;
+import com.studyolle.demo.domain.Event;
+import com.studyolle.demo.domain.Study;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+
+@Service
+@Transactional
+public class EventService {
+    private EventRepository eventRepository;
+
+
+    public Event createNewEvent(Event event, Study study, Account account) {
+        event.setCreatedBy(account);
+        event.setCreatedDateTime(LocalDateTime.now());
+        event.setStudy(study);
+        return eventRepository.save(event);
+    }
+}

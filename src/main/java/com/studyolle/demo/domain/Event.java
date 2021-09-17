@@ -39,9 +39,11 @@ public class Event {
     private int limitOfEnrollments;
 
     @OneToMany(mappedBy = "event")
-    private List<Enrollement> enrollements;
+    private List<Enrollement> enrollments;
 
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
+    public void setCreatedBy(Account account) {
+    }
 }

@@ -1,4 +1,4 @@
-package com.studyolle.demo.event;
+package com.studyolle.demo.event.form;
 
 import com.studyolle.demo.domain.EventType;
 import lombok.Data;
