@@ -1,5 +1,6 @@
 package com.studyolle.demo.domain;
 
+import com.studyolle.demo.modules.account.UserAccount;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,9 @@ public class Event {
 
     @ManyToOne
     private Study study;
+
+    @ManyToOne
+    private Account createdBy;
 
     @Column(nullable = false)
     private String title;
@@ -44,6 +48,41 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
-    public void setCreatedBy(Account account) {
+    public boolean isEnrollableFor(UserAccount userAccount) {
+        return isNotClosed() && !isAlreadyEnrolled(userAccount);
     }
+
+    public boolean isDisenrollableFor(UserAccount userAccount) {
+        return isNotClosed() && isAlreadyEnrolled(userAccount);
+    }
+
+    public boolean isAttended(UserAccount userAccount) {
+        Account account = userAccount.getAccount();
+        for (Enrollement e: this.enrollments) {
+            if (e.getAccount().equals(account) && e.isAttended()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isAlreadyEnrolled(UserAccount userAccount) {
+        Account account = userAccount.getAccount();
+        for (Enrollement e: this.enrollments) {
+            if (e.getAccount().equals(account) && e.isAttended()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isNotClosed() {
+        return this.endEnrollmentDateTime.isAfter(LocalDateTime.now());
+    }
+
+    public int numberOfRemainSpots() {
+        return this.limitOfEnrollments - (int)this.enrollments.stream().filter(Enrollement::isAccepted).count();
+    }
+
+
 }
