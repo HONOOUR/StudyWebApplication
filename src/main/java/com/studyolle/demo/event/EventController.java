@@ -15,6 +15,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/study/{path}")
 @RequiredArgsConstructor
@@ -42,7 +44,7 @@ public class EventController {
     }
 
     @PostMapping("/new-event")
-    public String updateNewEventForm(@CurrentAccount Account account, @PathVariable String path, Errors errors, Model model, EventForm eventForm) {
+    public String updateNewEventForm(@CurrentAccount Account account, @PathVariable String path, @Valid EventForm eventForm, Model model, Errors errors) {
         Study study = studyService.getStudyToUpdate(account, path);
         if (errors.hasErrors()) {
             model.addAttribute(account);

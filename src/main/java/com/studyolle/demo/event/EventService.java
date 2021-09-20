@@ -3,6 +3,7 @@ package com.studyolle.demo.event;
 import com.studyolle.demo.domain.Account;
 import com.studyolle.demo.domain.Event;
 import com.studyolle.demo.domain.Study;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,8 +11,9 @@ import java.time.LocalDateTime;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class EventService {
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
 
     public Event createNewEvent(Event event, Study study, Account account) {

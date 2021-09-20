@@ -25,6 +25,7 @@ public class EventValidator implements Validator{
         if (isNotValidEndDateTime(eventForm)) {
             errors.rejectValue("endDateTime", "wrong.datetime", "모임 종료 일시 정확히 입력하세요");
         }
+
         if (isNotValidStartDateTime(eventForm)) {
             errors.rejectValue("startDateTime", "wrong.datetime", "모임 시작 일시 정확히 입력하세요");
 
@@ -32,12 +33,13 @@ public class EventValidator implements Validator{
     }
 
     private boolean isNotValidStartDateTime(EventForm eventForm) {
-        return eventForm.getStartDateTime().isAfter(eventForm.getEndEnrollmentDateTime());
+        return eventForm.getStartDateTime().isBefore(eventForm.getEndEnrollmentDateTime());
     }
 
     private boolean isNotValidEndDateTime(EventForm eventForm) {
-        return eventForm.getEndDateTime().isBefore(eventForm.getStartDateTime())  || eventForm.getEndDateTime().isBefore(eventForm.getEndEnrollmentDateTime());
+        return eventForm.getEndDateTime().isBefore(eventForm.getStartDateTime()) || eventForm.getEndDateTime().isBefore(eventForm.getEndEnrollmentDateTime());
     }
+
 
     private boolean isNotValidEndEnrollmentDateTime(EventForm eventForm) {
         return eventForm.getEndEnrollmentDateTime().isBefore(LocalDateTime.now());
