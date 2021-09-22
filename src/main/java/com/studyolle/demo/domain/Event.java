@@ -9,6 +9,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@NamedEntityGraph(
+        name = "Event.withEnrollments",
+        attributeNodes = @NamedAttributeNode("enrollments")
+)
+
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
 public class Event {

@@ -1,9 +1,7 @@
 package com.studyolle.demo.modules.study;
 
-import com.studyolle.demo.domain.Account;
-import com.studyolle.demo.domain.Study;
-import com.studyolle.demo.domain.Tag;
-import com.studyolle.demo.domain.Zone;
+import com.studyolle.demo.domain.*;
+import com.studyolle.demo.event.EventRepository;
 import com.studyolle.demo.modules.study.form.StudyDescriptionForm;
 import com.studyolle.demo.modules.study.form.StudyPathForm;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +10,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -21,6 +21,7 @@ public class StudyService {
 
     private final StudyRepository studyRepository;
     private final ModelMapper modelMapper;
+    private final EventRepository eventRepository;
 
     public Study createNewStudy(Study study, Account account) {
         Study newStudy = studyRepository.save(study);
