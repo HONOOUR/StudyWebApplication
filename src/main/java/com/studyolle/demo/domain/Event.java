@@ -90,4 +90,13 @@ public class Event {
     }
 
 
+    public int getNumberOfAcceptedEnrollments() {
+        int acceptedEnrollmentsCount = 0;
+        for (Enrollement e: this.enrollments) {
+            if (e.isAccepted()) {
+                acceptedEnrollmentsCount++;
+            }
+        }
+        return acceptedEnrollmentsCount;
+    }
 }

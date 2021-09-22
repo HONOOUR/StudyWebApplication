@@ -18,7 +18,7 @@
                             <span th:text="${newEvents.size()}">2</span>
                         </a>
                         <a href="#"class="list-group-item list-group-item-action">지난 모임</a>
-                            <span th:text="${newEvents.size()}">5</span>
+                            <span th:text="${oldEvents.size()}">5</span>
                     </div>
                 </div>
                 <div class="col-10 row row-cols-md-2">
@@ -83,6 +83,35 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
 
+        })
+    </script>
+    <script src="/node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            moment.locale('ko');
+            $(".date-time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('LLL');
+            });
+            $(".date").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('LL');
+            });
+            $(".weekday").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('dddd');
+            });
+            $(".time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('LT');
+            });
+            $(".calendar").text(function(index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").calendar();
+            });
+            $(".fromNow").text(function(index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").fromNow();
+            });
+            $(".date-weekday-time").text(function(index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLLL');
+            });
         })
     </script>
 </body>

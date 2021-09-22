@@ -26,14 +26,12 @@ public class StudyService {
     public Study createNewStudy(Study study, Account account) {
         Study newStudy = studyRepository.save(study);
         newStudy.addManager(account);
-
         return newStudy;
     }
 
     public Study getStudyToUpdate(Account account, String path) {
         Study study = getStudy(path);
         checkIfManager(account, study);
-
         return study;
     }
 
@@ -46,7 +44,27 @@ public class StudyService {
     public Study getStudy(String path) {
         Study study = this.studyRepository.findByPath(path);
         checkIfExistingStudy(path, study);
+        return study;
+    }
 
+    public Study getStudyToUpdateTag(Account account, String path) {
+        Study study = studyRepository.findStudyWithTagsByPath(path);
+        checkIfExistingStudy(path, study);
+        checkIfManager(account, study);
+        return study;
+    }
+
+    public Study getStudyToUpdateZone(Account account, String path) {
+        Study study = studyRepository.findStudyWithZonesByPath(path);
+        checkIfExistingStudy(path, study);
+        checkIfManager(account, study);
+        return study;
+    }
+
+    public Study getStudyToUpdateStatus(Account account, String path) {
+        Study study = studyRepository.findStudyWithManagersByPath(path);
+        checkIfExistingStudy(path, study);
+        checkIfManager(account, study);
         return study;
     }
 
