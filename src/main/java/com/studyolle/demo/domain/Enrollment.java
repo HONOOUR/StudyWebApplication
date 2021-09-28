@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
-public class Enrollement {
+public class Enrollment {
 
     @Id @GeneratedValue
     private Long id;
