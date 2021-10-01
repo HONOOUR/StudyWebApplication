@@ -1,11 +1,10 @@
 package com.studyolle.demo.modules.account;
 
-import com.studyolle.demo.config.AppProperties;
-import com.studyolle.demo.domain.Account;
-import com.studyolle.demo.domain.Tag;
-import com.studyolle.demo.domain.Zone;
-import com.studyolle.demo.mail.EmailMessage;
-import com.studyolle.demo.mail.EmailService;
+import com.studyolle.demo.infra.config.AppProperties;
+import com.studyolle.demo.modules.zone.Tag;
+import com.studyolle.demo.modules.tag.Zone;
+import com.studyolle.demo.infra.mail.EmailMessage;
+import com.studyolle.demo.infra.mail.EmailService;
 import com.studyolle.demo.modules.settings.form.Notification;
 import com.studyolle.demo.modules.settings.form.Profile;
 import lombok.RequiredArgsConstructor;

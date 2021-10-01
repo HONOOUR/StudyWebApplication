@@ -1,17 +1,17 @@
 package com.studyolle.demo.modules.study;
 
-import com.studyolle.demo.domain.*;
-import com.studyolle.demo.event.EventRepository;
+import com.studyolle.demo.modules.account.Account;
+import com.studyolle.demo.modules.study.event.StudyCreatedEvent;
 import com.studyolle.demo.modules.study.form.StudyDescriptionForm;
 import com.studyolle.demo.modules.study.form.StudyPathForm;
+import com.studyolle.demo.modules.tag.Zone;
+import com.studyolle.demo.modules.zone.Tag;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -36,7 +36,7 @@ public class StudyService {
     }
 
     private void checkIfManager(Account account, Study study) {
-        if (!account.isManagerOf(study, account)) {
+        if (!study.isManagedBy(account)) {
             throw new AccessDeniedException("해당 기능을 사용할 수 없습니다.");
         }
     }

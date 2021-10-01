@@ -1,7 +1,7 @@
 package com.studyolle.demo.modules.settings.validator;
 
 import com.studyolle.demo.modules.account.AccountRepository;
-import com.studyolle.demo.domain.Account;
+import com.studyolle.demo.modules.account.Account;
 import com.studyolle.demo.modules.settings.form.NicknameForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

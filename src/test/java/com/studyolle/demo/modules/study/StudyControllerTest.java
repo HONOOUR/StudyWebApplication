@@ -4,22 +4,16 @@ import com.studyolle.demo.infra.AbstractContainerBaseTest;
 import com.studyolle.demo.infra.MockMvcTest;
 import com.studyolle.demo.modules.account.WithAccount;
 import com.studyolle.demo.modules.account.AccountRepository;
-import com.studyolle.demo.domain.Account;
-import com.studyolle.demo.domain.Study;
-import lombok.RequiredArgsConstructor;
+import com.studyolle.demo.modules.account.Account;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import org.springframework.transaction.annotation.Transactional;
 
 @MockMvcTest
 public class StudyControllerTest extends AbstractContainerBaseTest {

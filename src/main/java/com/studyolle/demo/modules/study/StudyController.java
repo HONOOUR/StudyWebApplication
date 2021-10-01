@@ -2,8 +2,7 @@ package com.studyolle.demo.modules.study;
 
 
 import com.studyolle.demo.modules.account.CurrentAccount;
-import com.studyolle.demo.domain.Account;
-import com.studyolle.demo.domain.Study;
+import com.studyolle.demo.modules.account.Account;
 import com.studyolle.demo.modules.study.form.StudyForm;
 import com.studyolle.demo.modules.study.validator.StudyFormValidator;
 import lombok.RequiredArgsConstructor;

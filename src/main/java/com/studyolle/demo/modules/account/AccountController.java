@@ -1,6 +1,5 @@
 package com.studyolle.demo.modules.account;
 
-import com.studyolle.demo.domain.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

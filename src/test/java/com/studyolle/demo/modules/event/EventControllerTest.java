@@ -1,13 +1,12 @@
 package com.studyolle.demo.modules.event;
 
-import com.studyolle.demo.domain.*;
-import com.studyolle.demo.event.EnrollmentRepository;
-import com.studyolle.demo.event.EventService;
 import com.studyolle.demo.infra.AbstractContainerBaseTest;
 import com.studyolle.demo.infra.MockMvcTest;
+import com.studyolle.demo.modules.account.Account;
 import com.studyolle.demo.modules.account.AccountFactory;
 import com.studyolle.demo.modules.account.AccountRepository;
 import com.studyolle.demo.modules.account.WithAccount;
+import com.studyolle.demo.modules.study.Study;
 import com.studyolle.demo.modules.study.StudyFactory;
 import com.studyolle.demo.modules.study.StudyService;
 import org.junit.jupiter.api.DisplayName;
@@ -16,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

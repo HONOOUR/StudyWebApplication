@@ -1,6 +1,6 @@
 package com.studyolle.demo.modules.settings.form;
 
-import com.studyolle.demo.domain.Zone;
+import com.studyolle.demo.modules.tag.Zone;
 import lombok.Data;
 
 @Data

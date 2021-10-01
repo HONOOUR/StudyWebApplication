@@ -1,10 +1,9 @@
 package com.studyolle.demo.modules.account;
 
-import com.studyolle.demo.domain.Account;
 import com.studyolle.demo.infra.AbstractContainerBaseTest;
 import com.studyolle.demo.infra.MockMvcTest;
-import com.studyolle.demo.mail.EmailMessage;
-import com.studyolle.demo.mail.EmailService;
+import com.studyolle.demo.infra.mail.EmailMessage;
+import com.studyolle.demo.infra.mail.EmailService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

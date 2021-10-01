@@ -1,8 +1,7 @@
 package com.studyolle.demo.modules.study;
 
 import com.studyolle.demo.modules.account.UserAccount;
-import com.studyolle.demo.domain.Account;
-import com.studyolle.demo.domain.Study;
+import com.studyolle.demo.modules.account.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
