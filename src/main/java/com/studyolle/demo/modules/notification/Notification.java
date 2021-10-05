@@ -30,6 +30,6 @@ public class Notification {
     @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
 
-    private LocalDateTime createdLocalDateTime;
+    private LocalDateTime createdDateTime;
 
 }
