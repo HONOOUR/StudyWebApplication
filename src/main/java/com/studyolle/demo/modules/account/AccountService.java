@@ -1,8 +1,8 @@
 package com.studyolle.demo.modules.account;
 
 import com.studyolle.demo.infra.config.AppProperties;
-import com.studyolle.demo.modules.zone.Tag;
-import com.studyolle.demo.modules.tag.Zone;
+import com.studyolle.demo.modules.tag.Tag;
+import com.studyolle.demo.modules.zone.Zone;
 import com.studyolle.demo.infra.mail.EmailMessage;
 import com.studyolle.demo.infra.mail.EmailService;
 import com.studyolle.demo.modules.settings.form.Notification;

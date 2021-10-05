@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.studyolle.demo.modules.account.CurrentAccount;
 import com.studyolle.demo.modules.account.Account;
-import com.studyolle.demo.modules.zone.Tag;
-import com.studyolle.demo.modules.tag.Zone;
-import com.studyolle.demo.modules.settings.form.ZoneForm;
+import com.studyolle.demo.modules.tag.Tag;
+import com.studyolle.demo.modules.zone.Zone;
+import com.studyolle.demo.modules.zone.ZoneForm;
 import com.studyolle.demo.modules.study.form.StudyDescriptionForm;
 import com.studyolle.demo.modules.study.form.StudyPathForm;
 import com.studyolle.demo.modules.tag.TagForm;
@@ -138,10 +138,10 @@ public class StudySettingsController {
         model.addAttribute(study);
 
         Set<Zone> zones = studyService.getZones(study);
-        model.addAttribute("zones", zones.stream().map(Zone::getCity).collect(Collectors.toList()));
+        model.addAttribute("zones", zones.stream().map(Zone::toString).collect(Collectors.toList()));
 
-        List<String> allTags = zoneRepository.findAll().stream().map(Zone::getCity).collect(Collectors.toList());
-        model.addAttribute("whitelist", objectMapper.writeValueAsString(allTags));
+        List<String> allZones = zoneRepository.findAll().stream().map(Zone::toString).collect(Collectors.toList());
+        model.addAttribute("whitelist", objectMapper.writeValueAsString(allZones));
 
         return "study/settings/zones";
     }

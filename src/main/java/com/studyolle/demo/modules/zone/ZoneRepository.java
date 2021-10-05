@@ -1,6 +1,5 @@
 package com.studyolle.demo.modules.zone;
 
-import com.studyolle.demo.modules.tag.Zone;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

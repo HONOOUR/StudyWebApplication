@@ -1,6 +1,5 @@
 package com.studyolle.demo.modules.tag;
 
-import com.studyolle.demo.modules.zone.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,12 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class TagService {
-    private TagRepository tagRepository;
+    private final TagRepository tagRepository;
 
     public Tag findOrCreateNew(String tagTitle) {
         Tag tag = tagRepository.findByTitle(tagTitle);
         if (tag == null) {
-            tagRepository.save(tag);
+            tagRepository.save(Tag.builder().title(tagTitle).build());
         }
         return tag;
     }

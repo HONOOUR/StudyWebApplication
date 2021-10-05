@@ -1,6 +1,5 @@
 package com.studyolle.demo.modules.zone;
 
-import com.studyolle.demo.modules.tag.Zone;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

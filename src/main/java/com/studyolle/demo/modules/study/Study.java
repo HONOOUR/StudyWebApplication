@@ -1,7 +1,7 @@
 package com.studyolle.demo.modules.study;
 
-import com.studyolle.demo.modules.zone.Tag;
-import com.studyolle.demo.modules.tag.Zone;
+import com.studyolle.demo.modules.tag.Tag;
+import com.studyolle.demo.modules.zone.Zone;
 import com.studyolle.demo.modules.account.Account;
 import com.studyolle.demo.modules.account.UserAccount;
 import lombok.*;
@@ -24,6 +24,10 @@ import java.util.Set;
 @NamedEntityGraph(name = "Study.withZonesAndManagers", attributeNodes = {
         @NamedAttributeNode("zones"),
         @NamedAttributeNode("managers")})
+@NamedEntityGraph(name = "Study.withTagsAndZones", attributeNodes = {
+        @NamedAttributeNode("tags"),
+        @NamedAttributeNode("zones")})
+
 
 
 @Entity

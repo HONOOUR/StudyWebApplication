@@ -4,10 +4,11 @@ import com.studyolle.demo.modules.account.Account;
 import com.studyolle.demo.modules.study.event.StudyCreatedEvent;
 import com.studyolle.demo.modules.study.form.StudyDescriptionForm;
 import com.studyolle.demo.modules.study.form.StudyPathForm;
-import com.studyolle.demo.modules.tag.Zone;
-import com.studyolle.demo.modules.zone.Tag;
+import com.studyolle.demo.modules.zone.Zone;
+import com.studyolle.demo.modules.tag.Tag;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class StudyService {
 
     private final StudyRepository studyRepository;
     private final ModelMapper modelMapper;
-    private final EventRepository eventRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     public Study createNewStudy(Study study, Account account) {
         Study newStudy = studyRepository.save(study);
@@ -119,6 +120,7 @@ public class StudyService {
 
     public void publish(Study study) {
         study.publish();
+        eventPublisher.publishEvent(new StudyCreatedEvent(study));
     }
 
     public void startRecruit(Study study) {

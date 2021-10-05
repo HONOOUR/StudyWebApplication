@@ -1,8 +1,7 @@
 package com.studyolle.demo.modules.account;
 
-import com.studyolle.demo.modules.study.Study;
-import com.studyolle.demo.modules.zone.Tag;
-import com.studyolle.demo.modules.tag.Zone;
+import com.studyolle.demo.modules.tag.Tag;
+import com.studyolle.demo.modules.zone.Zone;
 import lombok.*;
 
 import javax.persistence.*;
