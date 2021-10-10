@@ -147,7 +147,7 @@
             <span sec:authorize="isAuthenticated()" th:if="${study.published && !study.closed && study.isManager(#authentication.principal)}"
                   class="btn-group" role="group">
                     <a class="btn btn-outline-primary" th:href="@{'/study/' + ${study.path} + '/new-event'}">
-                        <i class="fa fa-plus"></i> Create Study
+                        <i class="fa fa-plus"></i> Create Event
                     </a>
                 </span>
         </div>
@@ -327,15 +327,47 @@
 </div>
 
 <div th:fragment="notification-list (notifications)">
-    <ul class="list-unstyled col-9">
-        <li th:href="@{${noti.link}}" class="media mt-3" th:each="noti: ${notifications}">
+    <ul class="list-group-item list-group-item-action">
+        <a th:href="@{${noti.link}}" th:each="noti: ${notifications}">
             <div class="d-flex w-100 justify-content-between">
                 <small class="text-muted" th:text="${noti.title}">Noti title</small>
                 <small class="fromNow text-muted" th:text="${noti.createdDateTime}">3 days ago</small>
             </div>
             <p th:text="${noti.message}" class="text-left mb-0 mt-1">message</p>
-        </li>
+        </a>
     </ul>
+</div>
+
+<div th:fragment="date-time">
+    <script src="/node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            moment.locale('ko');
+            $(".date-time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('LLL');
+            });
+            $(".date").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('LL');
+            });
+            $(".weekday").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('dddd');
+            });
+            $(".time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD'T'hh:mm").format('LT');
+            });
+            $(".calendar").text(function(index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").calendar();
+            });
+            $(".fromNow").text(function(index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").fromNow();
+            });
+            $(".date-weekday-time").text(function(index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLLL');
+            });
+        })
+    </script>
 </div>
 
 <script type="application/javascript" th:fragment="form-validation">

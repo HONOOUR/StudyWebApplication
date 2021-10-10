@@ -5,6 +5,7 @@ import com.studyolle.demo.modules.study.Study;
 import com.studyolle.demo.modules.event.form.EventForm;
 import com.studyolle.demo.modules.event.validator.EventValidator;
 import com.studyolle.demo.modules.account.CurrentAccount;
+import com.studyolle.demo.modules.study.StudyRepository;
 import com.studyolle.demo.modules.study.StudyService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -31,6 +32,7 @@ public class EventController {
     private final EventValidator eventValidator;
     private final EventRepository eventRepository;
     private final EnrollmentRepository enrollmentRepository;
+    private final StudyRepository studyRepositroy;
 
     @InitBinder("eventForm")
     public void initBinder(WebDataBinder webDataBinder) {
@@ -63,7 +65,7 @@ public class EventController {
     public String getEvent(@CurrentAccount Account account, @PathVariable String path, @PathVariable Long id, Model model) {
         model.addAttribute(account);
         model.addAttribute(eventRepository.findById(id).orElseThrow());
-        model.addAttribute(studyService.getStudyToUpdate(account, path));
+        model.addAttribute(studyRepositroy.findStudyWithManagersByPath(path));
         return "event/view";
     }
 
