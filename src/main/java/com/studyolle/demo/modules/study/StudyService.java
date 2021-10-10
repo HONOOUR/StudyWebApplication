@@ -2,6 +2,7 @@ package com.studyolle.demo.modules.study;
 
 import com.studyolle.demo.modules.account.Account;
 import com.studyolle.demo.modules.study.event.StudyCreatedEvent;
+import com.studyolle.demo.modules.study.event.StudyUpdateEvent;
 import com.studyolle.demo.modules.study.form.StudyDescriptionForm;
 import com.studyolle.demo.modules.study.form.StudyPathForm;
 import com.studyolle.demo.modules.zone.Zone;
@@ -116,19 +117,21 @@ public class StudyService {
 
     public void close(Study study) {
         study.close();
+        eventPublisher.publishEvent(new StudyUpdateEvent(study, "스터디를 종료했습니다."));
     }
 
     public void publish(Study study) {
         study.publish();
-        eventPublisher.publishEvent(new StudyCreatedEvent(study));
     }
 
     public void startRecruit(Study study) {
         study.startRecruit(study);
+        eventPublisher.publishEvent(new StudyUpdateEvent(study, "팀원 모집을 시작합니다."));
     }
 
     public void stopRecruit(Study study) {
         study.stopRecruit(study);
+        eventPublisher.publishEvent(new StudyUpdateEvent(study, "팀원 모집을 중단했습니다."));
     }
 
     public void updateStudyPath(Study study, StudyPathForm studyPathForm) {

@@ -5,6 +5,7 @@ import com.studyolle.demo.modules.account.CurrentAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
@@ -23,6 +24,21 @@ public class NotificationController {
         putCategorizedNotifications(model, notifications, numberOfChecked, notifications.size());
         model.addAttribute("isNew", true);
         return "notification/list";
+    }
+
+    @GetMapping("/notifications/old")
+    public String getOldNotifications(@CurrentAccount Account account, Model model) {
+        List<Notification> notifications = notificationRepository.findByAccountAndCheckedOrderByCreatedDateTimeDesc(account, true);
+        long numberOfChecked = notificationRepository.countByAccountAndChecked(account, true);
+        putCategorizedNotifications(model, notifications, numberOfChecked, notifications.size());
+        model.addAttribute("isNew", false);
+        return "notification/list";
+    }
+
+    @DeleteMapping("/notification")
+    public String deleteNotifications(@CurrentAccount Account account) {
+        notificationRepository.deleteByAccountAndChecked(account, true);
+        return "redirect:/notification/list";
     }
 
     private void putCategorizedNotifications(Model model, List<Notification> notifications, long numberOfChecked, long numberOfNotChecked) {
