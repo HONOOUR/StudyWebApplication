@@ -5,15 +5,18 @@ import com.studyolle.demo.modules.study.event.StudyCreatedEvent;
 import com.studyolle.demo.modules.study.event.StudyUpdateEvent;
 import com.studyolle.demo.modules.study.form.StudyDescriptionForm;
 import com.studyolle.demo.modules.study.form.StudyPathForm;
+import com.studyolle.demo.modules.tag.TagRepository;
 import com.studyolle.demo.modules.zone.Zone;
 import com.studyolle.demo.modules.tag.Tag;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -24,6 +27,7 @@ public class StudyService {
     private final StudyRepository studyRepository;
     private final ModelMapper modelMapper;
     private final ApplicationEventPublisher eventPublisher;
+    private final TagRepository tagRepository;
 
     public Study createNewStudy(Study study, Account account) {
         Study newStudy = studyRepository.save(study);
@@ -174,4 +178,5 @@ public class StudyService {
         checkIfExistingStudy(path, study);
         return study;
     }
+
 }
